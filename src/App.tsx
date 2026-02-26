@@ -19,6 +19,15 @@ import { FinalCTA } from './components/final-cta';
 import { SiteFooter } from './components/site-footer';
 import { ContactPage } from './components/contact-page';
 import { DriversPage } from './components/drivers-page';
+import img1 from './components/images/1.jpg';
+import img2 from './components/images/2.jpg';
+import img3 from './components/images/3.jpg';
+import img4 from './components/images/4.jpg';
+import img5 from './components/images/5.jpg';
+import img6 from './components/images/6.jpg';
+import img7 from './components/images/7.jpg';
+import mainLogo from './components/images/Logo/3.png';
+
 
 
 
@@ -34,13 +43,13 @@ const logos = [
 ];
 
 const showcaseImages = [
-  { src: "https://photos.fife.usercontent.google.com/pw/AP1GczMbWOCti0HHhcDWmgBqpzXStt3rsDWKgDp_LsCZZbOU7fNTnqEhMyvQ=w1280-h720-s-no-gm?authuser=0", alt: 'Enertech Showcase 1' },
-  { src: "https://photos.fife.usercontent.google.com/pw/AP1GczPQMIcRiGBWu4KYGod6TCtQW-KfKLn2cznerI7DhSuf9CfEaWzN9okQ=w1280-h720-s-no-gm?authuser=0", alt: 'Enertech Showcase 2' },
-  { src: "https://photos.fife.usercontent.google.com/pw/AP1GczOJBHe0S-Z6YtmHpJpnvJCZ57Lkxna8qYDEQ-xcwuS3XI3NzMwu4Gk8=w1280-h720-s-no-gm?authuser=0", alt: 'Enertech Showcase 3' },
-  { src: "https://photos.fife.usercontent.google.com/pw/AP1GczPsJS2iueVSD0B_D8lOlztdrZyISQMfKiQlqJyh0-dRNE5JTzpmFl3A=w1280-h720-s-no-gm?authuser=0", alt: 'Enertech Showcase 4' },
-  { src: "https://photos.fife.usercontent.google.com/pw/AP1GczOuDdMy4j9LaTO5UC0cPLyqLw0Bo20_UIg_YwmtATVbjyltDMoG3s5-=w1280-h720-s-no-gm?authuser=0", alt: 'Enertech Showcase 5' },
-  { src: "https://photos.fife.usercontent.google.com/pw/AP1GczM8bsD0vHSQU3GWBEBpe6YweBXAlsHtxTdE8uHjitbFfSL49SfbkWze=w1280-h720-s-no-gm?authuser=0", alt: 'Enertech Showcase 6' },
-  { src: "https://photos.fife.usercontent.google.com/pw/AP1GczN-q3MwKj68tQ7bizKxeO1eciogLiKb98PFOWbPD2tlg4v2df62BOBB=w1280-h720-s-no-gm?authuser=0", alt: 'Enertech Showcase 7' },
+  { src: img1, alt: 'Enertech Showcase 1' },
+  { src: img2, alt: 'Enertech Showcase 2' },
+  { src: img3, alt: 'Enertech Showcase 3' },
+  { src: img4, alt: 'Enertech Showcase 4' },
+  { src: img5, alt: 'Enertech Showcase 5' },
+  { src: img6, alt: 'Enertech Showcase 6' },
+  { src: img7, alt: 'Enertech Showcase 7' },
 ];
 
 const timelineData = [
@@ -190,7 +199,7 @@ export default function App() {
             className="flex items-center cursor-pointer"
           >
             <img
-              src={"https://photos.fife.usercontent.google.com/pw/AP1GczMJ4Qv_Q_LaGg6EwifYjDnRD_q0VqVDyDg2xr0rFK6wwjpn-dNQLuFc=w2940-h588-s-no-gm?authuser=0"}
+              src={mainLogo}
               alt="Enertech Logo"
               className="h-8 md:h-10 w-auto brightness-0 invert"
             />
