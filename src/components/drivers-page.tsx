@@ -10,28 +10,19 @@ import {
     AlertCircle,
     Battery,
     Timer,
-    Thermometer
+    Thermometer,
+    QrCode,
+    CreditCard,
+    PlugZap
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const chargingSteps = [
     {
-        id: "app",
-        title: "The App",
-        icon: Smartphone,
-        description: "Open the Enertech app. Your location is automatically detected. Select your charger and connector type.",
-        details: [
-            "Real-time availability tracking",
-            "One-tap start functionality",
-            "Live session monitoring",
-            "Digital receipt management"
-        ]
-    },
-    {
-        id: "tap",
-        title: "The Tap",
-        icon: Zap,
-        description: "Plug the connector into your EV's port. You'll hear a clear click when it's securely locked.",
+        id: "connect",
+        title: "Connect",
+        icon: PlugZap,
+        description: "Park and plug the connector into your car. You should hear a \"click\" when it's secure.",
         details: [
             "Industry-standard connectors (CCS, NACS)",
             "High-durability hardware",
@@ -40,15 +31,39 @@ const chargingSteps = [
         ]
     },
     {
-        id: "power",
-        title: "The Power",
-        icon: Power,
-        description: "Tap 'Start' in the app. Power flows immediately, delivering high-speed charging to your battery.",
+        id: "scan",
+        title: "Scan to Pay",
+        icon: QrCode,
+        description: "Point your phone camera at the QR code on the screen.",
         details: [
+            "No app? Pay via Monta web portal",
+            "Have the app? Opens automatically",
+            "Secure guest checkout",
+            "Instant access"
+        ]
+    },
+    {
+        id: "authorize",
+        title: "Authorize",
+        icon: CreditCard,
+        description: "Follow the prompts to select your charging amount and payment (Apple/Google Pay or Card).",
+        details: [
+            "Apple Pay & Google Pay supported",
+            "Major credit cards accepted",
+            "Transparent pricing",
+            "Pre-auth security"
+        ]
+    },
+    {
+        id: "power",
+        title: "Power Up",
+        icon: Power,
+        description: "Once authorized, the charger will lock the cable and begin. Track your progress live on your phone.",
+        details: [
+            "Live session monitoring",
             "Ultra-fast charging rates",
-            "Smart power distribution",
             "100% renewable energy",
-            "Safe-disconnect technology"
+            "Automatic digital receipts"
         ]
     }
 ];
@@ -77,7 +92,7 @@ const faqs = [
 ];
 
 const ProTip = ({ icon: Icon, title, description }: { icon: any, title: string, description: string }) => (
-    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
+    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-xl">
         <div className="flex items-center gap-4 mb-4">
             <div className="p-2 bg-white/10 rounded-lg">
                 <Icon className="w-5 h-5 text-white" />
@@ -115,7 +130,7 @@ export function DriversPage() {
                         className="text-4xl md:text-6xl font-serif text-white mb-6"
                     >
                         Power Your Journey in <br />
-                        <span className="italic font-light opacity-80">Three Simple Steps</span>
+                        <span className="italic font-light opacity-80">Four Simple Steps</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -187,8 +202,9 @@ export function DriversPage() {
 
                                 {/* Decorative Elements */}
                                 <div className="absolute bottom-12 right-12 opacity-20">
-                                    {activeStep === 'app' && <Smartphone className="w-32 h-32 text-white" />}
-                                    {activeStep === 'tap' && <Zap className="w-32 h-32 text-white" />}
+                                    {activeStep === 'connect' && <PlugZap className="w-32 h-32 text-white" />}
+                                    {activeStep === 'scan' && <QrCode className="w-32 h-32 text-white" />}
+                                    {activeStep === 'authorize' && <CreditCard className="w-32 h-32 text-white" />}
                                     {activeStep === 'power' && <Power className="w-32 h-32 text-white" />}
                                 </div>
                             </motion.div>
@@ -233,7 +249,7 @@ export function DriversPage() {
                         {faqs.map((faq, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden"
+                                className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-xl"
                             >
                                 <button
                                     onClick={() => setOpenFaq(openFaq === idx ? null : idx)}

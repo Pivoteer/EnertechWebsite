@@ -4,8 +4,8 @@
  */
 
 import React, { useEffect } from 'react';
-import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import Lenis from 'lenis';
 import { LogoCloud } from './components/ui/logo-cloud-3';
@@ -139,6 +139,7 @@ const timelineData = [
 
 export default function App() {
   const [currentPage, setCurrentPage] = React.useState<'home' | 'contact' | 'drivers'>('home');
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -209,27 +210,99 @@ export default function App() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="flex items-center gap-8 text-xs uppercase tracking-[0.2em] font-medium text-white/90"
+            className="flex items-center gap-4 md:gap-8 text-xs uppercase tracking-[0.2em] font-medium text-white/90"
           >
+            <div className="hidden md:flex items-center gap-8">
+              <button
+                onClick={() => { setCurrentPage('drivers'); setIsMenuOpen(false); }}
+                className={cn(
+                  "hover:text-white transition-colors cursor-pointer",
+                  currentPage === 'drivers' ? "text-white underline underline-offset-8" : "text-white/90"
+                )}
+              >
+                FOR DRIVERS
+              </button>
+              <a href="#partnerships" onClick={() => { setCurrentPage('home'); setIsMenuOpen(false); }} className="hover:text-white transition-colors">Partnerships</a>
+              <a href="#process" onClick={() => { setCurrentPage('home'); setIsMenuOpen(false); }} className="hover:text-white transition-colors">Process</a>
+            </div>
             <button
-              onClick={() => setCurrentPage('drivers')}
-              className={cn(
-                "hover:text-white transition-colors hidden md:block cursor-pointer",
-                currentPage === 'drivers' ? "text-white underline underline-offset-8" : "text-white/90"
-              )}
-            >
-              FOR DRIVERS
-            </button>
-            <a href="#partnerships" onClick={() => setCurrentPage('home')} className="hover:text-white transition-colors hidden md:block">Partnerships</a>
-            <a href="#process" onClick={() => setCurrentPage('home')} className="hover:text-white transition-colors hidden md:block">Process</a>
-            <button
-              onClick={() => setCurrentPage('contact')}
-              className="px-6 py-3 border border-white/30 rounded-full hover:bg-white hover:text-black transition-all duration-300 cursor-pointer backdrop-blur-sm"
+              onClick={() => { setCurrentPage('contact'); setIsMenuOpen(false); }}
+              className="px-6 py-3 border border-white/30 rounded-full hover:bg-white hover:text-black transition-all duration-300 cursor-pointer backdrop-blur-sm hidden md:block"
             >
               Contact
             </button>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-white md:hidden cursor-pointer"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </motion.div>
         </nav>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-0 z-[60] p-4 md:hidden"
+            >
+              <div className="w-full h-full rounded-[2.5rem] bg-black/95 backdrop-blur-2xl border border-white/10 flex flex-col items-center justify-center gap-12 text-center">
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="absolute top-8 right-8 p-2 text-white/60 hover:text-white transition-colors"
+                >
+                  <X className="w-8 h-8" />
+                </button>
+
+                <div className="flex flex-col gap-8 text-lg uppercase tracking-[0.3em] font-medium text-white/80">
+                  <button
+                    onClick={() => { setCurrentPage('home'); setIsMenuOpen(false); }}
+                    className={cn(
+                      "hover:text-white transition-colors cursor-pointer",
+                      currentPage === 'home' ? "text-white" : ""
+                    )}
+                  >
+                    Home
+                  </button>
+                  <button
+                    onClick={() => { setCurrentPage('drivers'); setIsMenuOpen(false); }}
+                    className={cn(
+                      "hover:text-white transition-colors cursor-pointer",
+                      currentPage === 'drivers' ? "text-white" : ""
+                    )}
+                  >
+                    FOR DRIVERS
+                  </button>
+                  <a
+                    href="#partnerships"
+                    onClick={() => { setCurrentPage('home'); setIsMenuOpen(false); }}
+                    className="hover:text-white transition-colors"
+                  >
+                    Partnerships
+                  </a>
+                  <a
+                    href="#process"
+                    onClick={() => { setCurrentPage('home'); setIsMenuOpen(false); }}
+                    className="hover:text-white transition-colors"
+                  >
+                    Process
+                  </a>
+                </div>
+
+                <button
+                  onClick={() => { setCurrentPage('contact'); setIsMenuOpen(false); }}
+                  className="px-12 py-5 border border-white/30 rounded-full hover:bg-white hover:text-black transition-all duration-300 cursor-pointer text-sm uppercase tracking-widest font-bold"
+                >
+                  Contact
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Scrollable content within the frame */}
         <div
